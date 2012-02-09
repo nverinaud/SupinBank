@@ -23,37 +23,16 @@ public class User implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String firstname;
-    private String lastname;
     private String email;
-    private String address;
-    private Integer zipCode;
-    private String city;
-    private Integer phone;
+    private String password;
+        
     
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-    
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getEmail() {
@@ -64,38 +43,13 @@ public class User implements Serializable
         this.email = email;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Integer getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
-
-    public Integer getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(Integer zipCode) {
-        this.zipCode = zipCode;
-    }
-    
 
     @Override
     public int hashCode() {

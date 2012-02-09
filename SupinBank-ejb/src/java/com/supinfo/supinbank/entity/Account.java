@@ -6,6 +6,8 @@ package com.supinfo.supinbank.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -36,6 +38,50 @@ public class Account implements Serializable
     
     @Column(name="account_key")
     private String key;
+    
+    @ManyToOne
+    @JoinColumn
+    private User owner;
+    
+    @OneToMany(mappedBy="sourceAccount")
+    @JoinColumn
+    private List<Operation> sourceOperations;
+    
+    @OneToMany(mappedBy="destinationAccount")
+    @JoinColumn
+    private List<Operation> destinationOperations;
+    
+    public List<Operation> getOperations() 
+    {
+        List<Operation> operations = getDestinationOperations();
+        operations.addAll(getSourceOperations());
+        Collections.sort(operations);
+        return operations;
+    }
+
+    public List<Operation> getDestinationOperations() {
+        return destinationOperations;
+    }
+
+    public void setDestinationOperations(List<Operation> destinationOperations) {
+        this.destinationOperations = destinationOperations;
+    }
+
+    public List<Operation> getSourceOperations() {
+        return sourceOperations;
+    }
+
+    public void setSourceOperations(List<Operation> sourceOperations) {
+        this.sourceOperations = sourceOperations;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
     public Long getId() {
         return id;

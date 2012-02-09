@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="operations")
-public class Operation implements Serializable 
+public class Operation implements Serializable, Comparable<Operation> 
 {
     private static final long serialVersionUID = 1L;
     @Id
@@ -29,7 +29,30 @@ public class Operation implements Serializable
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name="transfer_date")
     private Date date;
+    
+    @ManyToOne(optional=false)
+    @JoinColumn
+    private Account sourceAccount;
+    
+    @ManyToOne(optional=false)
+    @JoinColumn
+    private Account destinationAccount;
 
+    public Account getDestinationAccount() {
+        return destinationAccount;
+    }
+
+    public void setDestinationAccount(Account destinationAccount) {
+        this.destinationAccount = destinationAccount;
+    }
+
+    public Account getSourceAccount() {
+        return sourceAccount;
+    }
+
+    public void setSourceAccount(Account sourceAccount) {
+        this.sourceAccount = sourceAccount;
+    }
     
     public BigDecimal getAmount() {
         return amount;
@@ -94,6 +117,12 @@ public class Operation implements Serializable
     @Override
     public String toString() {
         return "com.supinfo.supinbank.entity.Operation[ id=" + id + " ]";
+    }
+
+    @Override
+    public int compareTo(Operation t) 
+    {
+        return this.date.compareTo(t.date);
     }
     
 }
