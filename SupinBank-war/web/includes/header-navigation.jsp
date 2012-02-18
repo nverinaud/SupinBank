@@ -18,10 +18,9 @@
                 </div>
                 <c:choose>
                     <c:when test="${not empty userEmail}">
-                        <div class="navbar-text pull-right">
-                            <p>Welcome <strong><c:out value="${userEmail}" /></strong> !</p>
-                        </div>
-                        <a class="navbar-text pull-right" href="signout">Signout</a>
+                        <p class="navbar-text pull-right">
+                            Welcome <strong><c:out value="${userEmail}" /></strong> ! <a href="signout">Signout</a>
+                        </p>
                     </c:when>
                     <c:otherwise>
                         <form class="navbar-search pull-right" action="signin" method="post">
