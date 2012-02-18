@@ -6,10 +6,16 @@ package com.supinfo.supinbank.dao.jpa;
 
 import com.supinfo.supinbank.dao.UserDao;
 import com.supinfo.supinbank.entity.User;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -28,9 +34,21 @@ public class JpaUserDao implements UserDao
     }
 
     @Override
-    public User authenticateUserWithIdPassword(Long userId, String clearPassword) 
+    public User authenticateUserWithEmailPassword(String email, String clearPassword) 
     {
-        return null;
+        if (email == null || email.isEmpty())
+          return null;
+        
+        User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email").setParameter("email", email).getSingleResult();
+
+        if (clearPassword == null || clearPassword.isEmpty())
+            clearPassword = "";
+
+        String hash = DigestUtils.shaHex(clearPassword);
+        if (!user.getPassword().equals(hash))
+            user = null;
+        
+        return user;
     }
 
     @Override

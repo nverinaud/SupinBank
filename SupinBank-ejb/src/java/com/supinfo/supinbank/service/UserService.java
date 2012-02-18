@@ -24,4 +24,10 @@ public class UserService
     {
         return userDao.getAllCustomers();
     }
+    
+    
+    public User authenticateUserWithEmailPassword(String email, String password)
+    {
+        return userDao.authenticateUserWithEmailPassword(email, password);
+    }
 }

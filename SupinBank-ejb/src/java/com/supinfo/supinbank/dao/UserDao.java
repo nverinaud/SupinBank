@@ -17,7 +17,7 @@ public interface UserDao
 {
     List<User> getAllCustomers();
     
-    User authenticateUserWithIdPassword(Long userId, String clearPassword);
+    User authenticateUserWithEmailPassword(String email, String clearPassword);
     
     void addUser(User u);
 }

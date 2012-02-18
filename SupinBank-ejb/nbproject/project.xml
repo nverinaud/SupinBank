@@ -15,6 +15,10 @@
             <included-library dirs="200">file.reference.javassist-3.15.0-GA.jar</included-library>
             <included-library dirs="200">file.reference.jboss-logging-3.1.0.CR2.jar</included-library>
             <included-library dirs="200">file.reference.jboss-transaction-api_1.1_spec-1.0.0.Final.jar</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.6-javadoc.jar</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.6-sources.jar</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.6-tests.jar</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.6.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
