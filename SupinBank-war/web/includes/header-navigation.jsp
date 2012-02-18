@@ -9,15 +9,22 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="#">SupinBank</a>
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
                 <c:choose>
                     <c:when test="${not empty userEmail}">
+                        <div class="nav-collapse">
+                            <ul class="nav">
+                                <c:choose>
+                                    <c:when test="${isAdvisor}">
+                                        <li><a href="#">List customer</a></li>
+                                        <li><a href="#">Add customer</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="#">Perform a transfer</a></li>
+                                        <li><a href="#">My operations</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                        </div>
                         <p class="navbar-text pull-right">
                             Welcome <strong><c:out value="${userEmail}" /></strong> ! <a href="signout">Signout</a>
                         </p>
