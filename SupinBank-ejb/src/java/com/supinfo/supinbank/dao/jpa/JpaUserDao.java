@@ -24,12 +24,13 @@ public class JpaUserDao implements UserDao
     @Override
     public List<User> getAllCustomers() 
     {
-        return em.createQuery("SELECT c FROM Customer c WHERE c.userType = 'Customer'").getResultList();
+        return em.createQuery("SELECT c FROM Customer c").getResultList();
     }
 
     @Override
-    public User authenticateUserWithIdPassword(Long userId, String clearPassword) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public User authenticateUserWithIdPassword(Long userId, String clearPassword) 
+    {
+        return null;
     }
 
     @Override

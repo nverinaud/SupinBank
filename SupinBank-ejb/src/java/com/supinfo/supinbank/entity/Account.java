@@ -15,6 +15,7 @@ import javax.persistence.*;
  * @author nico
  */
 @Entity
+@Table(name="accounts")
 public class Account implements Serializable 
 {
     public enum InterestPlan {
@@ -44,11 +45,9 @@ public class Account implements Serializable
     private User owner;
     
     @OneToMany(mappedBy="sourceAccount")
-    @JoinColumn
     private List<Operation> sourceOperations;
     
     @OneToMany(mappedBy="destinationAccount")
-    @JoinColumn
     private List<Operation> destinationOperations;
     
     public List<Operation> getOperations() 
