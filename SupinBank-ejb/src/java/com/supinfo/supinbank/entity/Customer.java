@@ -9,6 +9,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -18,11 +20,17 @@ import javax.persistence.OneToMany;
 @DiscriminatorValue("Customer")
 public class Customer extends User
 {    
+    @NotBlank
     private String firstname;
+    @NotBlank
     private String lastname;
+    @NotBlank
     private String address;
+    @NotNull
     private Integer zipCode;
+    @NotBlank
     private String city;
+    @NotNull
     private Integer phone;
     
     @OneToMany
