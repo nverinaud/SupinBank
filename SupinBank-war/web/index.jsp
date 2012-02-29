@@ -9,12 +9,8 @@
 <c:import url="includes/header.jsp" />
 
 <div class="page-header">
-    <h1>Welcome</h1>
+    <h1>Welcome to SupinBank !</h1>
 </div>
-    
-<h2>Welcome to SupinBank !</h2>
-
-<br/><br/>
 
 <form class="form-horizontal well" action="signin" method="post">
     <fieldset>
