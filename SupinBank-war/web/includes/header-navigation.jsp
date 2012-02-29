@@ -7,8 +7,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="#">SupinBank</a>
                 <c:choose>
@@ -27,13 +25,15 @@
                                 </c:choose>
                             </ul>
                         </div>
-                        <p class="navbar-text pull-right">
-                            Welcome <strong><c:out value="${userEmail}" /></strong> ! <a href="/signout">Signout</a>
-                        </p>
+                        <div class="nav-collapse">
+                            <p class="navbar-text pull-right">
+                                Welcome <strong><c:out value="${userEmail}" /></strong> ! <a href="${pageContext.servletContext.contextPath}/signout">Signout</a>
+                            </p>
+                        </div>
                     </c:when>
                     <c:otherwise>
                         <div class="nav-collapse">
-                            <form class="navbar-search pull-right" action="/signin" method="post">
+                            <form class="navbar-search pull-right" action="${pageContext.servletContext.contextPath}/signin" method="post">
                                 <input type="text" class="search-query span3" name="email" placeholder="Email" />
                                 <input type="password" class="search-query span2" name="password" placeholder="Password" />
                                 <input type="submit" class="btn" value="Sign In" />

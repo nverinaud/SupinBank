@@ -12,7 +12,7 @@
     <h1>Welcome to SupinBank !</h1>
 </div>
 
-<form class="form-horizontal well" action="/signin" method="post">
+<form class="form-horizontal well" action="${pageContext.servletContext.contextPath}/signin" method="post">
     <fieldset>
         <legend>Please log in before continue.</legend>
         <div class="control-group">

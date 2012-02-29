@@ -12,7 +12,7 @@
     <h1>Add Customer</h1>
 </div>
 
-<form class="form-horizontal well" action="/advisor/add_customer" method="post">
+<form class="form-horizontal well" action="${pageContext.servletContext.contextPath}/advisor/add_customer" method="post">
     <fieldset>
         <legend>Enter Information to create a new Customer</legend>
         <div class="control-group">

@@ -33,7 +33,7 @@ public class SignInServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     
@@ -51,8 +51,11 @@ public class SignInServlet extends HttpServlet
             boolean isAdvisor = user instanceof Advisor;
             request.getSession().setAttribute("isAdvisor", isAdvisor);
             request.getSession().setAttribute("userEmail", user.getEmail());
+            
+            System.out.println("User: " + user.getEmail());
+            
             if (isAdvisor) // Redirect to list of customers
-                response.sendRedirect(getServletContext().getContextPath() + "/advisor/customers");
+                response.sendRedirect(getServletContext().getContextPath()/* + "/advisor/customers"*/);
             else // Redirect to list of own account
                 response.sendRedirect(getServletContext().getContextPath());
         }
