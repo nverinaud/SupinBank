@@ -6,12 +6,6 @@ package com.supinfo.supinbank.dao.jpa;
 
 import com.supinfo.supinbank.dao.UserDao;
 import com.supinfo.supinbank.entity.User;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,12 +20,6 @@ public class JpaUserDao implements UserDao
 {
     @PersistenceContext
     private EntityManager em;
-    
-    @Override
-    public List<User> getAllCustomers() 
-    {
-        return em.createQuery("SELECT c FROM Customer c").getResultList();
-    }
 
     @Override
     public User authenticateUserWithEmailPassword(String email, String clearPassword) 

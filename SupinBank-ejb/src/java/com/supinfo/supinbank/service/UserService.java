@@ -6,7 +6,6 @@ package com.supinfo.supinbank.service;
 
 import com.supinfo.supinbank.dao.UserDao;
 import com.supinfo.supinbank.entity.User;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -18,13 +17,7 @@ import javax.ejb.Stateless;
 public class UserService 
 {
     @EJB
-    private UserDao userDao;
-    
-    public List<User> getAllCustomers()
-    {
-        return userDao.getAllCustomers();
-    }
-    
+    private UserDao userDao;    
     
     public User authenticateUserWithEmailPassword(String email, String password)
     {

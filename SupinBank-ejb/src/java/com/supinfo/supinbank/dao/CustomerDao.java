@@ -4,7 +4,7 @@
  */
 package com.supinfo.supinbank.dao;
 
-import com.supinfo.supinbank.entity.User;
+import com.supinfo.supinbank.entity.Customer;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -13,9 +13,9 @@ import javax.ejb.Local;
  * @author nico
  */
 @Local
-public interface UserDao 
-{   
-    User authenticateUserWithEmailPassword(String email, String clearPassword);
-    
-    void addUser(User u);
+public interface CustomerDao 
+{
+    List<Customer> findAllCustomers();
+    Customer findCustomerById(Long id);
+    void addCustomer(Customer c);
 }
