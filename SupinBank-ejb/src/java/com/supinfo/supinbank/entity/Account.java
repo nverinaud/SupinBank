@@ -51,6 +51,13 @@ public class Account implements Serializable
     @OneToMany(mappedBy="destinationAccount")
     private List<Operation> destinationOperations;
     
+    public Account()
+    {
+        interestsPlan = InterestsPlan.CURRENT_ACCOUNT;
+        name = "Main Account";
+        balance = new BigDecimal(0);
+    }
+    
     public List<String> getInterestsPlansDescriptions()
     {
         List<String> interestPlansDescriptions = new ArrayList<String>();
