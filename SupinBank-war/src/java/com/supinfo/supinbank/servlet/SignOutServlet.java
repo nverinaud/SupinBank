@@ -5,7 +5,6 @@
 package com.supinfo.supinbank.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author nico
  */
 @WebServlet(name = "SingOutServlet", urlPatterns = {"/signout"})
-public class SingOutServlet extends HttpServlet 
+public class SignOutServlet extends HttpServlet 
 {
    
     @Override
