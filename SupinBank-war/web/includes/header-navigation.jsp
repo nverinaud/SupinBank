@@ -16,7 +16,7 @@
                                 <c:choose>
                                     <c:when test="${isAdvisor}">
                                         <li><a href="#">List customer</a></li>
-                                        <li><a href="#">Add customer</a></li>
+                                        <li><a href="${pageContext.servletContext.contextPath}/advisor/add_customer">Add customer</a></li>
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="#">Perform a transfer</a></li>

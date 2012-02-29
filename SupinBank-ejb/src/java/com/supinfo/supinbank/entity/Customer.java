@@ -9,7 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -26,12 +26,13 @@ public class Customer extends User
     private String lastname;
     @NotBlank
     private String address;
-    @NotNull
-    private Integer zipCode;
+    @NotBlank
+    private String zipCode;
     @NotBlank
     private String city;
-    @NotNull
-    private Integer phone;
+    @NotBlank
+    @Size(min=10,max=10)
+    private String phone;
     
     @OneToMany
     @JoinColumn
@@ -77,19 +78,19 @@ public class Customer extends User
         this.lastname = lastname;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 }

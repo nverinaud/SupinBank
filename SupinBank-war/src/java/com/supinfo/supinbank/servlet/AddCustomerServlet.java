@@ -4,12 +4,19 @@
  */
 package com.supinfo.supinbank.servlet;
 
+import com.supinfo.supinbank.entity.Customer;
 import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  *
@@ -30,6 +37,35 @@ public class AddCustomerServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        Customer customer = new Customer();
+        customer.setEmail(request.getParameter("email"));
+        customer.setFirstname(request.getParameter("firstname"));
+        customer.setLastname(request.getParameter("lastname"));
+        customer.setCity(request.getParameter("city"));
+        customer.setAddress(request.getParameter("address"));
+        customer.setZipCode(request.getParameter("zipCode"));
+        customer.setPhone(request.getParameter("phone"));
         
+        request.setAttribute("customer", customer);
+        
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Customer>> constraintViolations = validator.validate(customer);
+        
+        if (!constraintViolations.isEmpty())
+        {
+            Hashtable<String, String> errors = new Hashtable<String, String>();
+            
+            for (ConstraintViolation<Customer> constraintViolation : constraintViolations) 
+                errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
+            
+            request.setAttribute("errors", errors);
+            request.setAttribute("flashError", "Unable to create a new Customer due to errors (see below).");
+            doGet(request, response);
+        }
+        else
+        {
+            // MultiPage for account creation
+        }
     }
 }
