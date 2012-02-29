@@ -8,15 +8,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">SupinBank</a>
+                <a class="brand" href="${pageContext.servletContext.contextPath}">SupinBank</a>
                 <c:choose>
                     <c:when test="${not empty userEmail}">
                         <div class="nav-collapse">
                             <ul class="nav">
                                 <c:choose>
                                     <c:when test="${isAdvisor}">
-                                        <li><a href="#">List customer</a></li>
-                                        <li><a href="${pageContext.servletContext.contextPath}/advisor/add_customer">Add customer</a></li>
+                                        <li><a href="#">Customers</a></li>
+                                        <li><a href="${pageContext.servletContext.contextPath}/advisor/customer/new">Add Customer</a></li>
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="#">Perform a transfer</a></li>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="nav-collapse">
                             <p class="navbar-text pull-right">
-                                Welcome <strong><c:out value="${userEmail}" /></strong> ! <a href="${pageContext.servletContext.contextPath}/signout">Signout</a>
+                                Welcome <strong>${userEmail}</strong> ! <a href="${pageContext.servletContext.contextPath}/signout">Signout</a>
                             </p>
                         </div>
                     </c:when>

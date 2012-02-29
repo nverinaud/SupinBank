@@ -6,8 +6,12 @@ package com.supinfo.supinbank.servlet;
 
 import com.supinfo.supinbank.entity.Customer;
 import java.io.IOException;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,14 +26,15 @@ import javax.validation.ValidatorFactory;
  *
  * @author nico
  */
-@WebServlet(name = "AddCustomerServlet", urlPatterns = {"/advisor/add_customer"})
+@WebServlet(name = "AddCustomerServlet", urlPatterns = {"/advisor/customer/new"})
 public class AddCustomerServlet extends HttpServlet 
-{
+{  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        request.getRequestDispatcher("/advisor/add_customer.jsp").forward(request, response);
+        request.getSession().removeAttribute("customer"); // Clear if customer were in session (request aborted)
+        request.getRequestDispatcher("/advisor/customer/new.jsp").forward(request, response);
     }
 
     
@@ -54,7 +59,7 @@ public class AddCustomerServlet extends HttpServlet
         
         if (!constraintViolations.isEmpty())
         {
-            Hashtable<String, String> errors = new Hashtable<String, String>();
+            HashMap<String, String> errors = new HashMap<String, String>();
             
             for (ConstraintViolation<Customer> constraintViolation : constraintViolations) 
                 errors.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
@@ -65,7 +70,8 @@ public class AddCustomerServlet extends HttpServlet
         }
         else
         {
-            // MultiPage for account creation
+            request.getSession().setAttribute("customer", customer);
+            response.sendRedirect(getServletContext().getContextPath()+"/advisor/customer/new_first_account");
         }
     }
 }

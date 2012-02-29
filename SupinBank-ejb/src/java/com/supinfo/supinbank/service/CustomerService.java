@@ -30,7 +30,7 @@ public class CustomerService
         return customerDao.findCustomerById(id);
     }
     
-    public void addCustomer(Customer c)
+    public void saveCustomer(Customer c)
     {
         customerDao.addCustomer(c);
     }
