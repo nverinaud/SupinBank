@@ -13,7 +13,7 @@
             <div class="control-group error">
                 <label class="control-label" for="firstname">Firstname</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" name="firstname" id="firstname" value="${customer.getFirstname()}/>
+                    <input type="text" class="input-xlarge" name="firstname" id="firstname" value="${customer.getFirstname()}"/>
                     <span class="help-inline"><c:out value="${errors.get('firstname')}"/></span>
                 </div>
             </div>

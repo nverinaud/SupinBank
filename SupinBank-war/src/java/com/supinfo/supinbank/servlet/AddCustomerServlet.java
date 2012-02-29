@@ -71,6 +71,7 @@ public class AddCustomerServlet extends HttpServlet
         else
         {
             request.getSession().setAttribute("customer", customer);
+            request.setAttribute("flashInfo", "You must provide " + customer.getFirstname() + " " + customer.getLastname() + " his first account.");
             response.sendRedirect(getServletContext().getContextPath()+"/advisor/customer/new_first_account");
         }
     }
