@@ -33,7 +33,7 @@
                         <form class="navbar-search pull-right" action="signin" method="post">
                             <input type="text" class="search-query" name="email" placeholder="Email" />
                             <input type="password" class="search-query input-medium" name="password" placeholder="Password" />
-                            <input type="submit" class="btn-inverse btn-small" value="Sign In" />
+                            <input type="submit" class="btn" value="Sign In" />
                         </form>
                     </c:otherwise>
                 </c:choose>
