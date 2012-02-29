@@ -15,7 +15,7 @@
                             <ul class="nav">
                                 <c:choose>
                                     <c:when test="${isAdvisor}">
-                                        <li><a href="#">Customers</a></li>
+                                        <li><a href="${pageContext.servletContext.contextPath}/advisor/customers">Customers</a></li>
                                         <li><a href="${pageContext.servletContext.contextPath}/advisor/customer/new">Add Customer</a></li>
                                     </c:when>
                                     <c:otherwise>
