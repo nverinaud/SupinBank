@@ -14,10 +14,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserDao 
-{
-    List<User> getAllCustomers();
-    
+{   
     User authenticateUserWithEmailPassword(String email, String clearPassword);
+    
+    String encryptPassword(String clearPassword);
     
     void addUser(User u);
 }

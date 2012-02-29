@@ -6,6 +6,7 @@ package com.supinfo.supinbank.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 @Table(name="accounts")
 public class Account implements Serializable 
 {
-    public enum InterestPlan {
+    public enum InterestsPlan {
         CURRENT_ACCOUNT, 
         SAVINGS_ACCOUNT, 
         LIFE_INSURANCE, 
@@ -31,7 +32,7 @@ public class Account implements Serializable
     private Long id;
     
     private String name;
-    private InterestPlan interestPlan;
+    private InterestsPlan interestsPlan;
     private BigDecimal balance;
     private String establishementCode;
     private String branchCode;
@@ -49,6 +50,51 @@ public class Account implements Serializable
     
     @OneToMany(mappedBy="destinationAccount")
     private List<Operation> destinationOperations;
+    
+    public List<String> getInterestsPlansDescriptions()
+    {
+        List<String> interestPlansDescriptions = new ArrayList<String>();
+        interestPlansDescriptions.add(stringFromInterestsPlan(InterestsPlan.CURRENT_ACCOUNT));
+        interestPlansDescriptions.add(stringFromInterestsPlan(InterestsPlan.SAVINGS_ACCOUNT));
+        interestPlansDescriptions.add(stringFromInterestsPlan(InterestsPlan.LIFE_INSURANCE));
+        interestPlansDescriptions.add(stringFromInterestsPlan(InterestsPlan.FIRST_HOME_SAVER_ACCOUNT));
+        return interestPlansDescriptions;
+    }
+    
+    public static InterestsPlan interestsPlanFromString(String ipAsString)
+    {
+        if (ipAsString.equals("Current Account"))
+            return InterestsPlan.CURRENT_ACCOUNT;
+        else if (ipAsString.equals("Savings Account"))
+            return InterestsPlan.SAVINGS_ACCOUNT;
+        else if (ipAsString.equals("Life Insurance"))
+            return InterestsPlan.LIFE_INSURANCE;
+        else if (ipAsString.equals("First Home Saver Account"))
+            return InterestsPlan.FIRST_HOME_SAVER_ACCOUNT;
+            
+        return InterestsPlan.CURRENT_ACCOUNT;
+    }
+    
+    public static String stringFromInterestsPlan(InterestsPlan ip)
+    {
+        switch(ip)
+        {
+            case CURRENT_ACCOUNT:
+                return "Current Account";
+            
+            case SAVINGS_ACCOUNT:
+                return "Savings Account";
+                    
+            case LIFE_INSURANCE:
+                return "Life Insurance";
+                        
+            case FIRST_HOME_SAVER_ACCOUNT:
+                return "First Home Saver Account";
+                
+            default:
+                return "Current Account";
+        }
+    }
     
     public List<Operation> getOperations() 
     {
@@ -122,12 +168,12 @@ public class Account implements Serializable
         this.establishementCode = establishementCode;
     }
 
-    public InterestPlan getInterestPlan() {
-        return interestPlan;
+    public InterestsPlan getInterestsPlan() {
+        return interestsPlan;
     }
 
-    public void setInterestPlan(InterestPlan interestPlan) {
-        this.interestPlan = interestPlan;
+    public void setInterestsPlan(InterestsPlan interestPlan) {
+        this.interestsPlan = interestPlan;
     }
 
     public String getKey() {

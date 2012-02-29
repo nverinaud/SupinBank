@@ -6,6 +6,8 @@ package com.supinfo.supinbank.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -23,7 +25,10 @@ public class User implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Email 
+    @NotBlank
     private String email;
+    
     private String password;
         
     
