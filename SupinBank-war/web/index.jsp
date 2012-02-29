@@ -6,13 +6,13 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="includes/header.jsp" />
+<c:import url="/includes/header.jsp" />
 
 <div class="page-header">
     <h1>Welcome to SupinBank !</h1>
 </div>
 
-<form class="form-horizontal well" action="signin" method="post">
+<form class="form-horizontal well" action="/signin" method="post">
     <fieldset>
         <legend>Please log in before continue.</legend>
         <div class="control-group">
@@ -33,4 +33,4 @@
     </fieldset>
 </form>
 
-<c:import url="includes/footer.jsp" />
+<c:import url="/includes/footer.jsp" />
