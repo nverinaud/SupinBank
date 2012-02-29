@@ -24,19 +24,26 @@ public class JpaUserDao implements UserDao
     @Override
     public User authenticateUserWithEmailPassword(String email, String clearPassword) 
     {
-        if (email == null || email.isEmpty())
-          return null;
-        
-        User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email").setParameter("email", email).getSingleResult();
+        try
+        {
+            if (email == null || email.isEmpty())
+            return null;
 
-        if (clearPassword == null || clearPassword.isEmpty())
-            clearPassword = "";
+            User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email").setParameter("email", email).getSingleResult();
 
-        String hash = encryptPassword(clearPassword);
-        if (!user.getPassword().equals(hash))
-            user = null;
-        
-        return user;
+            if (clearPassword == null || clearPassword.isEmpty())
+                clearPassword = "";
+
+            String hash = encryptPassword(clearPassword);
+            if (!user.getPassword().equals(hash))
+                user = null;
+
+            return user;
+        } 
+        catch (Exception ex)
+        {
+            return null;
+        }
     }
 
     @Override
