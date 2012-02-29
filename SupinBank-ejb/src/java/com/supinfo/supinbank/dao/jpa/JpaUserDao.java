@@ -32,7 +32,7 @@ public class JpaUserDao implements UserDao
         if (clearPassword == null || clearPassword.isEmpty())
             clearPassword = "";
 
-        String hash = DigestUtils.shaHex(clearPassword);
+        String hash = encryptPassword(clearPassword);
         if (!user.getPassword().equals(hash))
             user = null;
         
@@ -42,6 +42,12 @@ public class JpaUserDao implements UserDao
     @Override
     public void addUser(User u) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String encryptPassword(String clearPassword) 
+    {
+        return DigestUtils.shaHex(clearPassword);
     }
     
 }

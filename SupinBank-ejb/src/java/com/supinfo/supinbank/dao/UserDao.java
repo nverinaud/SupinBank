@@ -17,5 +17,7 @@ public interface UserDao
 {   
     User authenticateUserWithEmailPassword(String email, String clearPassword);
     
+    String encryptPassword(String clearPassword);
+    
     void addUser(User u);
 }
