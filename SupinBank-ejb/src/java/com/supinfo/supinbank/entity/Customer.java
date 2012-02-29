@@ -7,6 +7,7 @@ package com.supinfo.supinbank.entity;
 import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
@@ -34,7 +35,7 @@ public class Customer extends User
     @Size(min=10,max=10)
     private String phone;
     
-    @OneToMany
+    @OneToMany(fetch=FetchType.LAZY)
     @JoinColumn
     private Set<Account> accounts;
 

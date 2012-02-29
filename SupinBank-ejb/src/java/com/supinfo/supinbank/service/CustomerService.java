@@ -38,6 +38,11 @@ public class CustomerService
         return customerDao.findCustomerById(id);
     }
     
+    public Customer findCustomerByEmail(String email)
+    {
+        return customerDao.findCustomerByEmail(email);
+    }
+    
     public void saveCustomer(Customer c)
     {
         if (c.getPassword() == null || c.getPassword().isEmpty())

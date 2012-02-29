@@ -41,14 +41,14 @@ public class Account implements Serializable
     @Column(name="account_key")
     private String key;
     
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn
     private User owner;
     
-    @OneToMany(mappedBy="sourceAccount")
+    @OneToMany(mappedBy="sourceAccount", fetch=FetchType.LAZY)
     private List<Operation> sourceOperations;
     
-    @OneToMany(mappedBy="destinationAccount")
+    @OneToMany(mappedBy="destinationAccount", fetch=FetchType.LAZY)
     private List<Operation> destinationOperations;
     
     public Account()

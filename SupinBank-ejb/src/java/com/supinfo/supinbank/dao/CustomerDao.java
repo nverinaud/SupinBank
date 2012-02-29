@@ -17,5 +17,6 @@ public interface CustomerDao
 {
     List<Customer> findAllCustomers();
     Customer findCustomerById(Long id);
+    Customer findCustomerByEmail(String email);
     void addCustomer(Customer c);
 }
