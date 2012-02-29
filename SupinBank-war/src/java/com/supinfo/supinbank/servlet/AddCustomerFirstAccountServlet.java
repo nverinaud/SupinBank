@@ -36,7 +36,6 @@ public class AddCustomerFirstAccountServlet extends HttpServlet
         }
         else
         {
-            request.setAttribute("flashInfo", "You must provide " + customer.getFirstname() + " " + customer.getLastname() + " his first account.");
             request.setAttribute("customer", customer);
             request.setAttribute("account", new Account());
             request.getRequestDispatcher("/advisor/customer/new_first_account.jsp").forward(request, response);
