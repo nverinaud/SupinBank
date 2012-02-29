@@ -53,15 +53,13 @@ public class SignInServlet extends HttpServlet
             request.getSession().setAttribute("userEmail", user.getEmail());
             
             if (isAdvisor) // Redirect to list of customers
-                response.sendRedirect(getServletContext().getContextPath()/* + "/advisor/customers"*/);
+                response.sendRedirect(getServletContext().getContextPath() + "/advisor/customers");
             else // Redirect to list of own account
-                response.sendRedirect(getServletContext().getContextPath());
+                response.sendRedirect(getServletContext().getContextPath()/* + "/accounts"*/);
         }
         else
         {
-            List<String> errors = new ArrayList<String>();
-            errors.add("Username and password mismatch !");
-            request.setAttribute("errors", errors);
+            request.getSession().setAttribute("flashError", "Username and password mismatch !");
             doGet(request, response);
         }
     }
