@@ -65,7 +65,7 @@ public class ListAccountsOfCustomerServlet extends HttpServlet
             if (isAdvisor)
                 response.sendRedirect(getServletContext().getContextPath() + "/advisor/customers");
             else
-                response.sendRedirect(getServletContext().getContextPath()/* + "/account"*/);
+                response.sendRedirect(getServletContext().getContextPath() + "/myaccounts");
         }
         else
         {
