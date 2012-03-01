@@ -23,8 +23,8 @@
             <c:forEach var="account" items="${accounts}">
                 <tr>
                     <td>${account.id}</td>
-                    <td>${account.name}</td>
-                    <td>${account.balance}</td>
+                    <td><a href="#">${account.name}</a></td>
+                    <td>${account.balance} Eur</td>
                     <td>${account.interestsPlanDescription}</td>
                     <c:if test="${isAdvisor}">
                         <td><a class="btn" href="${pageContext.servletContext.contextPath}/advisor/account/add_money?accountId=${account.id}">Add Money $$</a></td>

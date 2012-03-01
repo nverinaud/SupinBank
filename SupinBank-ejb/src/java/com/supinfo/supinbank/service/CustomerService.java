@@ -43,7 +43,9 @@ public class CustomerService
     
     public Customer findCustomerByEmail(String email)
     {
-        return customerDao.findCustomerByEmail(email);
+        Customer c = customerDao.findCustomerByEmail(email);
+        Hibernate.initialize(c.getAccounts());
+        return c;
     }
     
     public void saveCustomer(Customer c)
