@@ -20,8 +20,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="${pageContext.servletContext.contextPath}/myaccounts">My Accounts</a></li>
-                                        <li><a href="#">Perform a Transfer</a></li>
-                                        <li><a href="#">My Operations</a></li>
+                                        <li><a href="${pageContext.servletContext.contextPath}/owner/transfer">Perform a Transfer</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
