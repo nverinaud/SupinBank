@@ -8,57 +8,58 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nico
  */
-@WebFilter(filterName = "FlashFilter", urlPatterns = {"/*"})
-public class FlashFilter implements Filter 
-{    
-    // The filter configuration object we are associated with.  If
-    // this value is null, this filter instance is not currently
-    // configured. 
+@WebFilter(filterName = "OwnerFilter", urlPatterns = {"/owner/*"})
+public class OwnerFilter implements Filter 
+{
     private FilterConfig filterConfig = null;
     
-    public FlashFilter() {
+    public OwnerFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException 
     {
-        if (request instanceof HttpServletRequest)
+        if (request instanceof HttpServletRequest && response instanceof HttpServletResponse)
         {
-            HttpServletRequest httpReq = (HttpServletRequest)request;
-            HttpSession session = httpReq.getSession();
+            HttpServletRequest req = (HttpServletRequest)request;
+            HttpServletResponse resp = (HttpServletResponse)response;
             
-            String flashError = (String) session.getAttribute("flashError");
-            if (flashError != null && httpReq.getAttribute("flashError") == null)
+            HttpSession session = req.getSession();
+            
+            try
             {
-                httpReq.setAttribute("flashError", flashError);
-                session.removeAttribute("flashError");
+                String userEmail = (String) session.getAttribute("userEmail");
+                if (userEmail == null || userEmail.isEmpty())
+                    throw new Exception("You must be logged in !");
             }
-            
-            String flashSuccess = (String) session.getAttribute("flashSuccess");
-            if (flashSuccess != null && httpReq.getAttribute("flashSuccess") == null)
+            catch (Exception ex)
             {
-                httpReq.setAttribute("flashSuccess", flashSuccess);
-                session.removeAttribute("flashSuccess");
-            }
-            
-            String flashInfo = (String) session.getAttribute("flashInfo");
-            if (flashInfo != null && httpReq.getAttribute("flashInfo") == null)
-            {
-                httpReq.setAttribute("flashInfo", flashInfo);
-                session.removeAttribute("flashInfo");
+                session.setAttribute("flashError", "You must login to continue.");
+                resp.sendRedirect(req.getServletContext().getContextPath()+"/signin");
             }
         }
     }    
     
+    private void doAfterProcessing(ServletRequest request, ServletResponse response)
+            throws IOException, ServletException 
+    {
+    }
+
     /**
      *
      * @param request The servlet request we are processing
@@ -68,11 +69,10 @@ public class FlashFilter implements Filter
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException 
-    {            
+    {        
         doBeforeProcessing(request, response);
         
         Throwable problem = null;
@@ -83,8 +83,11 @@ public class FlashFilter implements Filter
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
             problem = t;
+            t.printStackTrace();
         }
         
+        doAfterProcessing(request, response);
+
         // If there was a problem, we want to rethrow it if it is
         // a known type, otherwise log it.
         if (problem != null) {
@@ -117,18 +120,14 @@ public class FlashFilter implements Filter
     /**
      * Destroy method for this filter
      */
-    @Override
     public void destroy() {        
     }
 
     /**
      * Init method for this filter
      */
-    @Override
     public void init(FilterConfig filterConfig) {        
         this.filterConfig = filterConfig;
-        if (filterConfig != null) {
-        }
     }
 
     /**
@@ -137,9 +136,9 @@ public class FlashFilter implements Filter
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("FlashFilter()");
+            return ("OwnerFilter()");
         }
-        StringBuilder sb = new StringBuilder("FlashFilter(");
+        StringBuffer sb = new StringBuffer("OwnerFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
