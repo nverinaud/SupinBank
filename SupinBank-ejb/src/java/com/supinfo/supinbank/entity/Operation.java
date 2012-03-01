@@ -42,26 +42,6 @@ public class Operation implements Serializable, Comparable<Operation>
     {
         date = new Date();
     }
-    
-    public Operation(Operation o)
-    {
-        date = o.getDate();
-        amount = o.getAmount();
-        description = o.getDescription();
-        isExternal = o.isIsExternal();
-        sourceAccount = o.getSourceAccount();
-        destinationAccount = o.getDestinationAccount();
-    }
-    
-    public Operation(Operation o, boolean negate)
-    {
-        date = o.getDate();
-        amount = o.getAmount().negate();
-        description = o.getDescription();
-        isExternal = o.isIsExternal();
-        sourceAccount = o.getDestinationAccount();
-        destinationAccount = o.getSourceAccount();
-    }
 
     public Account getDestinationAccount() {
         return destinationAccount;
