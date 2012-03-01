@@ -4,7 +4,7 @@
  */
 package com.supinfo.supinbank.dao;
 
-import com.supinfo.supinbank.entity.Account;
+import com.supinfo.supinbank.entity.Operation;
 import javax.ejb.Local;
 
 /**
@@ -12,9 +12,8 @@ import javax.ejb.Local;
  * @author nico
  */
 @Local
-public interface AccountDao 
+public interface OperationDao 
 {
-    void createAccount(Account a);
-    Account find(Long id);
-    void update(Account a);
+    Operation find(Long id);
+    void create(Operation o);
 }

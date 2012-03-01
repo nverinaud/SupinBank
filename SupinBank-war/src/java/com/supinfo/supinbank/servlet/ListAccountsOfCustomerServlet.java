@@ -36,20 +36,33 @@ public class ListAccountsOfCustomerServlet extends HttpServlet
         }
         else
         {
-            Customer customer = customerService.findCustomerById(Long.parseLong(id));
+            try
+            {
+                Customer customer = customerService.findCustomerById(Long.parseLong(id));
             
-            if (customer == null || !isAuthorizedToSeeCustomer(request, response, customer))
-            {
-                doRedirect(request, response);
+                if (customer == null || !isAuthorizedToSeeCustomer(request, response, customer))
+                {
+                    doRedirect(request, response);
+                }
+                else
+                {
+                    request.setAttribute("customer", customer);
+                    request.setAttribute("accounts", customer.getAccounts());
+
+                    System.out.println(customer.getAccounts().toString());
+
+                    request.getRequestDispatcher("/customer.jsp").forward(request, response);
+                }
             }
-            else
+            catch (NullPointerException ex)
             {
-                request.setAttribute("customer", customer);
-                request.setAttribute("accounts", customer.getAccounts());
-                
-                System.out.println(customer.getAccounts().toString());
-                
-                request.getRequestDispatcher("/customer.jsp").forward(request, response);
+                request.getSession().setAttribute("flashError", "Access denied.");
+                response.sendRedirect(getServletContext().getContextPath()+"/signin");
+            }
+            catch (Exception ex)
+            {
+                request.getSession().setAttribute("flashError", "Whoops ! Unexpected errors occured.");
+                response.sendRedirect(getServletContext().getContextPath());
             }
         }
     }
