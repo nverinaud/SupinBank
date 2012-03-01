@@ -9,6 +9,7 @@ import com.supinfo.supinbank.entity.Account;
 import com.supinfo.supinbank.entity.Customer;
 import com.supinfo.supinbank.entity.Operation;
 import com.supinfo.supinbank.service.AccountService;
+import com.supinfo.supinbank.service.CentralBankService;
 import com.supinfo.supinbank.service.CustomerService;
 import com.supinfo.supinbank.service.OperationService;
 import java.io.IOException;
@@ -35,6 +36,9 @@ public class BankTransfersServlet extends HttpServlet
     
     @EJB
     private OperationService operationService;
+    
+    @EJB
+    private CentralBankService centralBankService;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -106,8 +110,21 @@ public class BankTransfersServlet extends HttpServlet
                 }
                 else if ("external".equals(transferType))
                 {
-                    request.getSession().setAttribute("flashError", "Unsupported Operation.");
-                    response.sendRedirect(getServletContext().getContextPath()+"/owner/transfer");
+                    try
+                    {
+                        Account destinationAccount = destinationAccountFromBBAN(request, response, false);
+                        
+                        Operation transfer = doBalancingAndSave(sourceAccount, destinationAccount, amount, wording);
+                        centralBankService.performTransfer(transfer);
+                        
+                        request.getSession().setAttribute("flashSuccess", "Your transfer has been made !");
+                        response.sendRedirect(getServletContext().getContextPath()+"/myaccounts");
+                    }
+                    catch(Exception ex)
+                    {
+                        request.getSession().setAttribute("flashError", "BBAN account error : " + ex.getMessage());
+                        response.sendRedirect(getServletContext().getContextPath()+"/owner/transfer");
+                    }
                 }
             }
         }
@@ -155,6 +172,7 @@ public class BankTransfersServlet extends HttpServlet
                     key == null || key.isEmpty() || key.length()<2)
                 throw new Exception("Invalid parameters.");
             
+            
             int computedKey = computeKey(establishmentCode, branchCode, accountNumber);
             int providedKey = Integer.parseInt(key);
             
@@ -166,6 +184,8 @@ public class BankTransfersServlet extends HttpServlet
                 account.setAccountNumber(accountNumber);
                 account.setKey(key);
                 account.setName("External Account");
+                
+                accountService.saveAccount(account);
             }
             else
             {
@@ -176,24 +196,23 @@ public class BankTransfersServlet extends HttpServlet
         return account;
     }
 
-    private void doBalancingAndSave(Account sourceAccount, Account destinationAccount, BigDecimal amount, String wording) 
+    private Operation doBalancingAndSave(Account sourceAccount, Account destinationAccount, BigDecimal amount, String wording) 
     {
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
         destinationAccount.setBalance(destinationAccount.getBalance().add(amount));
 
-        Operation credit = new Operation();
-        credit.setAmount(amount.abs());
-        credit.setDescription(wording);
-        credit.setIsExternal(false);
-        credit.setSourceAccount(sourceAccount);
-        credit.setDestinationAccount(destinationAccount);
+        Operation transfer = new Operation();
+        transfer.setAmount(amount);
+        transfer.setDescription(wording);
+        transfer.setIsExternal(false);
+        transfer.setSourceAccount(sourceAccount);
+        transfer.setDestinationAccount(destinationAccount);
 
-        Operation withdrawal = new Operation(credit, true); // negate
-
-        operationService.save(credit);
-        operationService.save(withdrawal);
+        operationService.save(transfer);
         accountService.saveAccount(sourceAccount);
         accountService.saveAccount(destinationAccount);
+        
+        return transfer;
     }
 
     private int computeKey(String establishmentCode, String branchCode, String accountNumber) 
