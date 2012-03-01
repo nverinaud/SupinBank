@@ -41,7 +41,7 @@ public class Account implements Serializable
     @Column(name="account_key")
     private String key;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn
     private User owner;
     

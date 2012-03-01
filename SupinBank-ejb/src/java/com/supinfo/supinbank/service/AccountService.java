@@ -21,6 +21,14 @@ public class AccountService
     
     public void saveAccount(Account a)
     {
-        accountDao.createAccount(a);
+        if (a.getId() == null)
+            accountDao.createAccount(a);
+        else
+            accountDao.update(a);
+    }
+    
+    public Account find(String id)
+    {
+        return accountDao.find(id);
     }
 }
