@@ -35,6 +35,7 @@
             <label class="control-label" for="password">Password</label>
             <div class="controls">
                 <input type="password" class="input-xlarge" name="password" id="password" value="foobar"/>
+                <span class="help-inline">"foobar"</span>
             </div>
         </div>
         <div class="form-actions">
