@@ -8,6 +8,7 @@ import com.supinfo.supinbank.dao.AccountDao;
 import com.supinfo.supinbank.entity.Account;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -29,6 +30,15 @@ public class AccountService
     
     public Account find(String id)
     {
-        return accountDao.find(id);
+        return accountDao.find(Long.parseLong(id));
+    }
+    
+    public Account findAndFetchAll(String id)
+    {
+        Account a = find(id);
+        Hibernate.initialize(a.getOperations());
+        Hibernate.initialize(a.getOwner());
+        Hibernate.initialize(a.getOwner().getAccounts());
+        return a;
     }
 }

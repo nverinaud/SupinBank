@@ -6,9 +6,7 @@ package com.supinfo.supinbank.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 
 /**
@@ -43,7 +41,7 @@ public class Account implements Serializable
     
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn
-    private User owner;
+    private Customer owner;
     
     @Transient
     private String interestsPlanDescription;
@@ -106,11 +104,10 @@ public class Account implements Serializable
         }
     }
     
-    public List<Operation> getOperations() 
+    public Set<Operation> getOperations() 
     {
-        List<Operation> operations = getDestinationOperations();
+        Set<Operation> operations = new TreeSet<Operation>(getDestinationOperations());
         operations.addAll(getSourceOperations());
-        Collections.sort(operations);
         return operations;
     }
 
@@ -130,11 +127,11 @@ public class Account implements Serializable
         this.sourceOperations = sourceOperations;
     }
 
-    public User getOwner() {
+    public Customer getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Customer owner) {
         this.owner = owner;
     }
 

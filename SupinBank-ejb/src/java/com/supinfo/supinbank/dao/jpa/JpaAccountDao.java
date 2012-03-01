@@ -27,9 +27,9 @@ public class JpaAccountDao implements AccountDao
     }
 
     @Override
-    public Account find(String id) 
+    public Account find(Long id) 
     {
-        return em.find(Account.class, Long.parseLong(id));
+        return em.find(Account.class, id);
     }
 
     @Override

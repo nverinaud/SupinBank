@@ -15,6 +15,6 @@ import javax.ejb.Local;
 public interface AccountDao 
 {
     void createAccount(Account a);
-    Account find(String id);
+    Account find(Long id);
     void update(Account a);
 }
