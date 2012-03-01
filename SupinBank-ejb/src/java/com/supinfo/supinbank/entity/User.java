@@ -6,6 +6,7 @@ package com.supinfo.supinbank.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -27,6 +28,7 @@ public class User implements Serializable
     
     @Email 
     @NotBlank
+    @Index(name="EmailIndex")
     private String email;
     
     private String password;

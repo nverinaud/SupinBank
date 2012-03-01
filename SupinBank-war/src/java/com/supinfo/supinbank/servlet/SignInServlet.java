@@ -55,7 +55,7 @@ public class SignInServlet extends HttpServlet
             if (isAdvisor) // Redirect to list of customers
                 response.sendRedirect(getServletContext().getContextPath() + "/advisor/customers");
             else // Redirect to list of own account
-                response.sendRedirect(getServletContext().getContextPath()/* + "/accounts"*/);
+                response.sendRedirect(getServletContext().getContextPath()/* + "/account"*/);
         }
         else
         {

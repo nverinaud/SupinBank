@@ -41,15 +41,25 @@ public class Account implements Serializable
     @Column(name="account_key")
     private String key;
     
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn
     private User owner;
     
-    @OneToMany(mappedBy="sourceAccount")
+    @Transient
+    private String interestsPlanDescription;
+    
+    @OneToMany(mappedBy="sourceAccount", fetch=FetchType.LAZY)
     private List<Operation> sourceOperations;
     
-    @OneToMany(mappedBy="destinationAccount")
+    @OneToMany(mappedBy="destinationAccount", fetch=FetchType.LAZY)
     private List<Operation> destinationOperations;
+    
+    public Account()
+    {
+        interestsPlan = InterestsPlan.CURRENT_ACCOUNT;
+        name = "Main Account";
+        balance = new BigDecimal(0);
+    }
     
     public List<String> getInterestsPlansDescriptions()
     {
@@ -190,6 +200,13 @@ public class Account implements Serializable
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getInterestsPlanDescription()
+    {
+        if (interestsPlanDescription == null)
+            interestsPlanDescription = Account.stringFromInterestsPlan(interestsPlan);
+        return interestsPlanDescription;
     }
 
     @Override

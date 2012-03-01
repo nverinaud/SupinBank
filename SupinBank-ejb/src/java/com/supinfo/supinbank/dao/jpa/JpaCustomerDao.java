@@ -38,5 +38,11 @@ public class JpaCustomerDao implements CustomerDao
     {
         em.persist(c);
     }
+
+    @Override
+    public Customer findCustomerByEmail(String email) 
+    {
+        return (Customer) em.createQuery("SELECT c FROM Customer c WHERE c.email = :email").setParameter("email", email).getSingleResult();
+    }
     
 }

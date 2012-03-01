@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -35,7 +36,14 @@ public class CustomerService
     
     public Customer findCustomerById(Long id)
     {
-        return customerDao.findCustomerById(id);
+        Customer c = customerDao.findCustomerById(id);
+        Hibernate.initialize(c.getAccounts());
+        return c;
+    }
+    
+    public Customer findCustomerByEmail(String email)
+    {
+        return customerDao.findCustomerByEmail(email);
     }
     
     public void saveCustomer(Customer c)

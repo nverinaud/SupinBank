@@ -6,6 +6,7 @@ package com.supinfo.supinbank.servlet;
 
 import com.supinfo.supinbank.entity.Account;
 import com.supinfo.supinbank.entity.Customer;
+import com.supinfo.supinbank.service.AccountService;
 import com.supinfo.supinbank.service.CustomerService;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -24,6 +25,9 @@ public class AddCustomerFirstAccountServlet extends HttpServlet
 {    
     @EJB
     private CustomerService customerService;
+    
+    @EJB
+    private AccountService accountService;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,18 +64,18 @@ public class AddCustomerFirstAccountServlet extends HttpServlet
             if (name.equals(""))
                 name = "Main Account";
             account.setName(name);
-            
             account.setInterestsPlan(Account.interestsPlanFromString(request.getParameter("interestsPlan")));
-            
             account.setOwner(customer);
+            
             customerService.saveCustomer(customer);
+            accountService.saveAccount(account);
             
             request.getSession().removeAttribute("customer");
             request.getSession().setAttribute("flashSuccess", customer.getFirstname() + " " 
                     + customer.getLastname() + " dispose maintenant d'un compte \"" 
                     + Account.stringFromInterestsPlan(account.getInterestsPlan()) + "\" chez SupinBank !");
             response.sendRedirect(getServletContext().getContextPath());
-//            response.sendRedirect(getServletContext().getContextPath()+"/advisor/customer/?id="+customer.getId());
+//            response.sendRedirect(getServletContext().getContextPath()+"/advisor/customer?id="+customer.getId());
         }
     }
 }

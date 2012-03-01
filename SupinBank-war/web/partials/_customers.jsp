@@ -31,7 +31,7 @@
                     <tr>
                         <td>${customer.firstname} ${customer.lastname}</td>
                         <td>${customer.email}</td>
-                        <td><a href="${pageContext.servletContext.contextPath}/advisor/customer?id=${customer.id}">Details</a></td>
+                        <td><a href="${pageContext.servletContext.contextPath}/customer?id=${customer.id}">Details</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
