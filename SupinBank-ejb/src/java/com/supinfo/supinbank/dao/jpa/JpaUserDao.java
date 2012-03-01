@@ -47,8 +47,9 @@ public class JpaUserDao implements UserDao
     }
 
     @Override
-    public void addUser(User u) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void addUser(User u) 
+    {
+        em.persist(u);
     }
 
     @Override

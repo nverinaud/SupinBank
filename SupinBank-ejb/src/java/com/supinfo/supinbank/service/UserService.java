@@ -23,4 +23,14 @@ public class UserService
     {
         return userDao.authenticateUserWithEmailPassword(email, password);
     }
+    
+    public String encryptedPassword(String clearPassword)
+    {
+        return userDao.encryptPassword(clearPassword);
+    }
+    
+    public void saveUser(User u)
+    {
+        userDao.addUser(u);
+    }
 }

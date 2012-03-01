@@ -31,11 +31,11 @@ public class Operation implements Serializable, Comparable<Operation>
     private Date date;
     
     @ManyToOne(optional=false)
-    @JoinColumn
+    @JoinColumn(name="sourceAccount_fk")
     private Account sourceAccount;
     
     @ManyToOne(optional=false)
-    @JoinColumn
+    @JoinColumn(name="destinationAccount_fk")
     private Account destinationAccount;
 
     public Account getDestinationAccount() {
