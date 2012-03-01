@@ -5,10 +5,12 @@
 package com.supinfo.supinbank.servlet;
 
 import com.supinfo.supinbank.entity.Account;
+import com.supinfo.supinbank.entity.Operation;
 import com.supinfo.supinbank.service.AccountService;
+import com.supinfo.supinbank.service.OperationService;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.logging.Logger;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +27,9 @@ public class AddMoneyServlet extends HttpServlet
 {
     @EJB
     private AccountService accountService;
+    
+    @EJB
+    private OperationService operationService;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,11 +71,18 @@ public class AddMoneyServlet extends HttpServlet
     {
         String accountId = request.getParameter("accountId");
         String amount = request.getParameter("amount");
-        if (accountId == null || accountId.isEmpty() || amount == null || amount.isEmpty())
+        String wording = request.getParameter("wording");
+        if (accountId == null || accountId.isEmpty() || amount == null || amount.isEmpty() || wording == null || wording.isEmpty())
         {
-            String errorMsg = "You have to provide an account id to add money to.";
+            String errorMsg = new String();
+            if (accountId == null || accountId.isEmpty())
+                errorMsg += "You have to provide an account id to add money to. ";
+            
             if (amount == null || amount.isEmpty())
-                errorMsg = "You have to provide an amount to add.";
+                errorMsg += "You have to provide an amount to add. ";
+            
+            if (wording == null || wording.isEmpty())
+                errorMsg += "You must specify a reason.";
             
             request.getSession().setAttribute("flashError", errorMsg);
             response.sendRedirect(getServletContext().getContextPath()+"/advisor/customers");
@@ -91,9 +103,16 @@ public class AddMoneyServlet extends HttpServlet
                     {
                         BigDecimal amnt = new BigDecimal(Double.parseDouble(amount));                        
                         BigDecimal current = account.getBalance();
-                        System.out.println("New balance: "+current.add(amnt));
                         account.setBalance(current.add(amnt));
                         accountService.saveAccount(account);
+                        
+                        Operation operation = new Operation();
+                        operation.setAmount(amnt);
+                        operation.setDescription(wording);
+                        operation.setDestinationAccount(account);
+                        operation.setSourceAccount(account);
+                        operationService.save(operation);
+                        
                         request.getSession().setAttribute("flashSuccess", "Account has been cashed $$$ !!");
                         response.sendRedirect(getServletContext().getContextPath()+"/customer?id="+account.getOwner().getId());
                     }

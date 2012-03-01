@@ -37,6 +37,11 @@ public class Operation implements Serializable, Comparable<Operation>
     @ManyToOne(optional=false)
     @JoinColumn(name="destinationAccount_fk")
     private Account destinationAccount;
+    
+    public Operation()
+    {
+        date = new Date();
+    }
 
     public Account getDestinationAccount() {
         return destinationAccount;

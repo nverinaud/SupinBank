@@ -24,7 +24,7 @@ public class OperationService
         return operationDao.find(Long.parseLong(id));
     }
     
-    public void create(Operation o)
+    public void save(Operation o)
     {
         operationDao.create(o);
     }

@@ -21,6 +21,12 @@
                 <span class="help-inline"> euros</span>
             </div>
         </div>
+        <div class="control-group">
+            <label class="control-label" for="wording">Reason</label>
+            <div class="controls">
+                <input type="text" name="wording" id="wording"/>
+            </div>
+        </div>
         <div class="form-actions">
             <input type="submit" class="btn btn-primary" value="Cash $$" />
         </div>
