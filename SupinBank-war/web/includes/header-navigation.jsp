@@ -19,8 +19,9 @@
                                         <li><a href="${pageContext.servletContext.contextPath}/advisor/customer/new">Add Customer</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="#">Perform a transfer</a></li>
-                                        <li><a href="#">My operations</a></li>
+                                        <li><a href="${pageContext.servletContext.contextPath}/myaccounts">My Accounts</a></li>
+                                        <li><a href="#">Perform a Transfer</a></li>
+                                        <li><a href="#">My Operations</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
