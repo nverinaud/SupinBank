@@ -24,7 +24,7 @@
         <div class="controls">
             <select name="sourceAccountId">
                 <c:forEach var="account" items="${accounts}">
-                    <option value="${account.id}">${account.name}</option>
+                    <option value="${account.id}">${account.name} (${account.balance} Eur)</option>
                 </c:forEach>
             </select>
         </div>
@@ -35,7 +35,7 @@
         <div class="controls">
             <select name="destinationAccountId">
                 <c:forEach var="account" items="${accounts}">
-                    <option value="${account.id}">${account.name}</option>
+                    <option value="${account.id}">${account.name} (${account.balance} Eur)</option>
                 </c:forEach>
             </select>
         </div>
