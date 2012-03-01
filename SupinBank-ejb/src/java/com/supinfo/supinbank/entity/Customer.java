@@ -36,7 +36,7 @@ public class Customer extends User
     private String phone;
     
     @OneToMany(fetch=FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name="owner_id")
     private Set<Account> accounts;
 
     public Set<Account> getAccounts() {

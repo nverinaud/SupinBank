@@ -96,7 +96,7 @@ public class PopulateDatabaseServlet extends HttpServlet
     {
         Customer c = new Customer();
         c.setFirstname(randomName());
-        c.setLastname(randomName());
+        c.setLastname(randomName().toUpperCase());
         c.setAddress("No Address");
         c.setCity("No Town");
         c.setEmail(emailFor(c));
@@ -113,6 +113,12 @@ public class PopulateDatabaseServlet extends HttpServlet
         {
             a = createAccount();
             a.setOwner(c);
+            if (i%4 == 0)
+                a.setInterestsPlan(Account.InterestsPlan.LIFE_INSURANCE);
+            else if (i%3 == 0)
+                a.setInterestsPlan(Account.InterestsPlan.SAVINGS_ACCOUNT);
+            else if (i%2 == 0)
+                a.setInterestsPlan(Account.InterestsPlan.FIRST_HOME_SAVER_ACCOUNT);
             accountService.saveAccount(a);
         }
     }
@@ -140,7 +146,7 @@ public class PopulateDatabaseServlet extends HttpServlet
     
     private String capitalizeFirstLetter(String s)
     {
-        return s.substring(0, 1).toUpperCase() + s.substring(1);
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
     
     

@@ -9,7 +9,7 @@
 <c:import url="/includes/header.jsp" />
 
 <div class="page-header">
-    <h1>Welcome to SupinBank !</h1>
+    <h1>${customer.firstname} ${customer.lastname} accounts</h1>
 </div>
 
 <c:import url="/partials/customer/_details.jsp" />

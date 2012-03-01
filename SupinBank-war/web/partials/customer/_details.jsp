@@ -8,12 +8,12 @@
 
 <c:if test="${not empty customer}">
     <div class="row">
-        <div class="span4">
+        <div class="span10">
             <p>Email: ${customer.email}</p>
         </div>
-        <div class="span4"></div>
-        <div class="span4">
+        <div class="span2">
             <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/accounts/new?customerid=${customer.id}">Add Account</a>
         </div>
     </div>
+    <br/>
 </c:if>

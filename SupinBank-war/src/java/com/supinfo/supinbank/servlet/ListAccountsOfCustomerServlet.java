@@ -46,6 +46,9 @@ public class ListAccountsOfCustomerServlet extends HttpServlet
             {
                 request.setAttribute("customer", customer);
                 request.setAttribute("accounts", customer.getAccounts());
+                
+                System.out.println(customer.getAccounts().toString());
+                
                 request.getRequestDispatcher("/customer.jsp").forward(request, response);
             }
         }

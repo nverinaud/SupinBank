@@ -45,6 +45,9 @@ public class Account implements Serializable
     @JoinColumn
     private User owner;
     
+    @Transient
+    private String interestsPlanDescription;
+    
     @OneToMany(mappedBy="sourceAccount", fetch=FetchType.LAZY)
     private List<Operation> sourceOperations;
     
@@ -197,6 +200,13 @@ public class Account implements Serializable
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getInterestsPlanDescription()
+    {
+        if (interestsPlanDescription == null)
+            interestsPlanDescription = Account.stringFromInterestsPlan(interestsPlan);
+        return interestsPlanDescription;
     }
 
     @Override
