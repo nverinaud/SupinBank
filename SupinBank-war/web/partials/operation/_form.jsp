@@ -15,7 +15,7 @@
         <div class="controls">
             <label class="checkbox"><input checked="checked" type="radio" name="transferType" value="internal"/>&nbsp;&nbsp;&nbsp;Internal</label>
             <label class="checkbox"><input type="radio" name="transferType" value="supinbank"/>&nbsp;&nbsp;&nbsp;SupinBank</label>
-            <label class="checkbox"><input type="radio" name="transferType" value="external" />&nbsp;&nbsp;&nbsp;External</label>
+            <!--<label class="checkbox"><input type="radio" name="transferType" value="external" />&nbsp;&nbsp;&nbsp;External</label>-->
         </div>
     </div>
     
@@ -38,6 +38,16 @@
                     <option value="${account.id}">${account.name} (${account.balance} Eur)</option>
                 </c:forEach>
             </select>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="establishementCode">Account Target Name (BBAN)</label>
+        <div class="controls">
+            <input type="text" maxlength="5" class="input-small" name="establishementCode" id="establishementCode"/>
+            <input type="text" maxlength="5" class="input-small" name="branchCode" id="branchCode"/>
+            <input type="text" maxlength="11" class="input-large" name="accountNumber" id="accountNumber"/>
+            <input type="text" maxlength="2" class="input-mini" name="key" id="key"/>
         </div>
     </div>
     
