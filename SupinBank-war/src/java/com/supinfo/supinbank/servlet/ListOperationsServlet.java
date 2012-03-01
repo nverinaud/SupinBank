@@ -42,30 +42,44 @@ public class ListOperationsServlet extends HttpServlet
         }
         else
         {
-            Account account = accountService.findAndFetchAll(accountId);
-            boolean isAdvisor = (Boolean) request.getSession().getAttribute("isAdvisor");
-            boolean isAuthorized = isAdvisor;
-            
-            if (!isAdvisor)
+            try
             {
-                String loggedInUserEmail = (String) request.getSession().getAttribute("userEmail");
-                Customer customer = customerService.findCustomerByEmail(loggedInUserEmail);
-                isAuthorized = account.getOwner().equals(customer);
+                Account account = accountService.findAndFetchAll(accountId);
+                boolean isAdvisor = (Boolean) request.getSession().getAttribute("isAdvisor");
+                boolean isAuthorized = isAdvisor;
+
+                if (!isAdvisor)
+                {
+                    String loggedInUserEmail = (String) request.getSession().getAttribute("userEmail");
+                    Customer customer = customerService.findCustomerByEmail(loggedInUserEmail);
+                    isAuthorized = account.getOwner().equals(customer);
+                }
+
+                if (isAuthorized)
+                {
+                    request.setAttribute("selectedAccountId", account.getId());
+                    request.setAttribute("owner", account.getOwner());
+                    request.setAttribute("accounts", account.getOwner().getAccounts());
+                    request.setAttribute("operations", account.getOperations());
+                    request.getRequestDispatcher("/operations.jsp").forward(request, response);
+                }
+                else
+                {
+                    request.getSession().setAttribute("flashError", "Access denied.");
+                    response.sendRedirect(getServletContext().getContextPath());
+                }
             }
-            
-            if (isAuthorized)
-            {
-                request.setAttribute("selectedAccountId", account.getId());
-                request.setAttribute("owner", account.getOwner());
-                request.setAttribute("accounts", account.getOwner().getAccounts());
-                request.setAttribute("operations", account.getOperations());
-                request.getRequestDispatcher("/operations.jsp").forward(request, response);
-            }
-            else
+            catch (NullPointerException ex)
             {
                 request.getSession().setAttribute("flashError", "Access denied.");
                 response.sendRedirect(getServletContext().getContextPath());
             }
+            catch (Exception ex)
+            {
+                request.getSession().setAttribute("flashError", "Whoops ! Unexpected errors occured.");
+                response.sendRedirect(getServletContext().getContextPath());
+            }
+            
         }
     }
 }
