@@ -25,4 +25,20 @@ public class JpaAccountDao implements AccountDao
     {
         em.persist(a);
     }
+
+    @Override
+    public Account find(String id) 
+    {
+        return em.find(Account.class, Long.parseLong(id));
+    }
+
+    @Override
+    public void update(Account a) 
+    {
+        em.createQuery("UPDATE Account a SET a.balance = :balance, a.name = :name WHERE a.id = :id ")
+                .setParameter("balance", a.getBalance())
+                .setParameter("name", a.getName())
+                .setParameter("id", a.getId())
+                .executeUpdate();
+    }
 }

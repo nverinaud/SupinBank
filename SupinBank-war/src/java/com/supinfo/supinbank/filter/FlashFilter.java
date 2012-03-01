@@ -37,9 +37,6 @@ public class FlashFilter implements Filter {
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException 
     {
-        if (debug)
-            log("FlashFilter:DoBeforeProcessing");
-        
         if (request instanceof HttpServletRequest)
         {
             HttpServletRequest httpReq = (HttpServletRequest)request;
@@ -69,10 +66,8 @@ public class FlashFilter implements Filter {
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {
-        if (debug) {
-            log("FlashFilter:DoAfterProcessing");
-        }
+            throws IOException, ServletException 
+    {
     }
 
     /**
@@ -87,12 +82,8 @@ public class FlashFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
-            throws IOException, ServletException {
-        
-        if (debug) {
-            log("FlashFilter:doFilter()");
-        }
-        
+            throws IOException, ServletException 
+    {            
         doBeforeProcessing(request, response);
         
         Throwable problem = null;

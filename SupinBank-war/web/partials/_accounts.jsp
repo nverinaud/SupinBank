@@ -14,6 +14,9 @@
                 <th>Name</th>
                 <th>Balance</th>
                 <th>Interest plan</th>
+                <c:if test="${isAdvisor}">
+                    <th></th>
+                </c:if>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +26,9 @@
                     <td>${account.name}</td>
                     <td>${account.balance}</td>
                     <td>${account.interestsPlanDescription}</td>
+                    <c:if test="${isAdvisor}">
+                        <td><a class="btn" href="${pageContext.servletContext.contextPath}/advisor/account/add_money?accountId=${account.id}">Add Money $$</a></td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </tbody>
