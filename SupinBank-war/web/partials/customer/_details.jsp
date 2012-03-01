@@ -12,7 +12,7 @@
             <p>Email: ${customer.email}</p>
         </div>
         <div class="span2">
-            <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/accounts/new?customerid=${customer.id}">Add Account</a>
+            <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/advisor/account/new?customerId=${customer.id}">Add Account</a>
         </div>
     </div>
     <br/>

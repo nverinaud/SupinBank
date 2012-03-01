@@ -9,7 +9,7 @@
 <c:import url="/includes/header.jsp" />
 
 <div class="page-header">
-    <h1>First Account for ${customer.getFirstname()} ${customer.getLastname()}</h1>
+    <h1>First Account : ${customer.firstname} ${customer.lastname}</h1>
 </div>
 
 <form class="form-horizontal well" action="${pageContext.servletContext.contextPath}/advisor/customer/new_first_account" method="post">

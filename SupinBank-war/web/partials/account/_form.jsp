@@ -48,6 +48,6 @@
 
     <div class="form-actions">
         <input type="submit" class="btn btn-primary" value="New Account" />
-        <a class="btn" href="${pageContext.servletContext.contextPath}/advisor/customer/new">Cancel</a>
+        <a class="btn" href="${pageContext.servletContext.contextPath}/advisor/customers">Cancel</a>
     </div>
 </fieldset>
