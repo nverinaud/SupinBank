@@ -74,8 +74,7 @@ public class AddCustomerFirstAccountServlet extends HttpServlet
             request.getSession().setAttribute("flashSuccess", customer.getFirstname() + " " 
                     + customer.getLastname() + " dispose maintenant d'un compte \"" 
                     + Account.stringFromInterestsPlan(account.getInterestsPlan()) + "\" chez SupinBank !");
-            response.sendRedirect(getServletContext().getContextPath());
-//            response.sendRedirect(getServletContext().getContextPath()+"/advisor/customer?id="+customer.getId());
+            response.sendRedirect(getServletContext().getContextPath()+"/customer?id="+customer.getId());
         }
     }
 }
