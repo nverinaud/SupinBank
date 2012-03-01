@@ -16,7 +16,8 @@
     <div class="span12">
         <a href="${pageContext.servletContext.contextPath}/db/populate?count=10">
             <div class="alert alert-info">
-                Click here to populate the database with the advisor and 10 customers with accounts !
+                Click here to populate the database with the advisor and 10 customers with accounts !<br/>
+                <em>(see glassfish logs for information about customer's clear password)</em>
             </div>
         </a>
     </div>
