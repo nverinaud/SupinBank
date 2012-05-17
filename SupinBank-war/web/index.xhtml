@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:tw="http://java.sun.com/jsf/composite/components/bootstrap"
+                template="/templates/application.xhtml">
+
+  <ui:param name="pageTitle" value="Login | SupinBank" />
+  <ui:define name="content">
+    
+    <div class="page-header">
+        <h1>Welcome to SupinBank !</h1>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+            <a href="#">
+                <div class="alert alert-info">
+                    Click here to populate the database with the advisor and 10 customers with accounts !<br/>
+                    <em>(see glassfish logs for information about customer's clear password)</em>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <form class="form-horizontal well" action="#" method="post">
+        <fieldset>
+            <legend>Please log in before continue.</legend>
+            <div class="control-group success">
+                <label class="control-label" for="email">Email</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" name="email" id="email" value="advisor@supinbank.com"/>
+                </div>
+            </div>
+            <div class="control-group success">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <input type="password" class="input-xlarge" name="password" id="password" value="foobar"/>
+                    <span class="help-inline">"foobar"</span>
+                </div>
+            </div>
+            <div class="form-actions">
+                <input type="submit" class="btn btn-primary" value="Sign In" />
+            </div>
+        </fieldset>
+    </form>
+
+  </ui:define>
+
+</ui:composition>

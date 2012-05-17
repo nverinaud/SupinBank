@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nico
  */
-@WebFilter(filterName = "OwnerFilter", urlPatterns = {"/owner/*"})
+//@WebFilter(filterName = "OwnerFilter", urlPatterns = {"/owner/*"})
 public class OwnerFilter implements Filter 
 {
     private FilterConfig filterConfig = null;

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nico
  */
-@WebFilter(filterName = "FlashFilter", urlPatterns = {"/*"})
+//@WebFilter(filterName = "FlashFilter", urlPatterns = {"/*"})
 public class FlashFilter implements Filter 
 {    
     // The filter configuration object we are associated with.  If

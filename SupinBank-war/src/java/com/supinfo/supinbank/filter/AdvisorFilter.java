@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nico
  */
-@WebFilter(filterName = "AdvisorFilter", urlPatterns = {"/advisor/*"})
+//@WebFilter(filterName = "AdvisorFilter", urlPatterns = {"/advisor/*"})
 public class AdvisorFilter implements Filter 
 {
     // The filter configuration object we are associated with.  If
