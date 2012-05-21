@@ -1,0 +1,9 @@
+
+<cloudbees-web-app>
+  <appid>myaccount/myapp</appid>
+  <resource name="jdbc/nverinaud-supinbank" auth="Container" type="javax.sql.DataSource">
+    <param name="username" value="nverinaud" />
+    <param name="password" value="java is so kikoo" />
+    <param name="url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com" />
+  </resource>
+</cloudbees-web-app>
