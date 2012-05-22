@@ -5,6 +5,7 @@
 package com.supinfo.supinbank.web.api.helper;
 
 import com.supinfo.supinbank.service.AccountService;
+import com.supinfo.supinbank.service.CustomerService;
 import com.supinfo.supinbank.service.UserService;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,5 +32,10 @@ public class ServiceLookupHelper {
   public static AccountService GetAccountService() 
           throws NamingException {
     return (AccountService) GetService("java:global/SupinBank/SupinBank-ejb/AccountService");
+  }
+  
+  public static CustomerService GetCustomerService()
+          throws NamingException {
+    return (CustomerService) GetService("java:global/SupinBank/SupinBank-ejb/CustomerService");
   }
 }

@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -18,6 +22,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="accounts")
+@XmlRootElement(name="accounts")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Account implements Serializable 
 {
     public enum InterestsPlan {
@@ -30,16 +36,24 @@ public class Account implements Serializable
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @XmlElement
     private Long id;
     
+    @XmlElement
     private String name;
+    @XmlElement
     private InterestsPlan interestsPlan;
+    @XmlElement
     private BigDecimal balance;
+    @XmlElement
     private String establishementCode;
+    @XmlElement
     private String branchCode;
+    @XmlElement
     private String accountNumber;
     
     @Column(name="account_key")
+    @XmlElement
     private String key;
     
     @ManyToOne(fetch=FetchType.EAGER)
