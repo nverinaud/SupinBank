@@ -27,17 +27,18 @@ public class JpaUserDao implements UserDao
         try
         {
             if (email == null || email.isEmpty())
-            return null;
+              return null;
 
             User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email").setParameter("email", email).getSingleResult();
-
+                        
             if (clearPassword == null || clearPassword.isEmpty())
                 clearPassword = "";
-
+                        
             String hash = encryptPassword(clearPassword);
+            
             if (!user.getPassword().equals(hash))
                 user = null;
-
+            
             return user;
         } 
         catch (Exception ex)
